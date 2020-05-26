@@ -1,0 +1,17 @@
+@media (min-width: 500px){
+    h3::before{
+        content: "Hey Everyone I'm Aditya Yadav, welcome to my website.";
+    }
+}
+@media (max-width: 499px){
+    h3::before{
+        content: "Hey Everyone, welcome to my website.";
+    }
+}
+
+
+@media screen and (max-width: 499px){
+    div.intro{
+        width: 80%;
+    }
+}
