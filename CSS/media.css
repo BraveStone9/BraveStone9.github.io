@@ -1,13 +1,17 @@
 @media (min-width: 500px){
-    h3::before{
-        content: "Hey Everyone I'm Aditya Yadav, welcome to my website.";
+    h4::before{
+        content: "Hey Everyone I'm Aditya Yadav";
     }
+    
+        
     
 }
 @media (max-width: 499px){
-    h3::before{
-        content: "Hey Everyone, welcome to my website.";
+    h4::before{
+        content: "Hey Everyone I'm Aditya Yadav";
     }
+    
+
 }
 
 
