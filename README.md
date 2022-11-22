@@ -1,4 +1,5 @@
-# Project0-portfolio
+#MY own website
 Tried making portfolio website for myself.
 
-Still need minor adjustments, will update it soon
+Its almost like a CV hosted up on github so that everyone can access it. 
+I welcome all suggestion and feedbacks.
