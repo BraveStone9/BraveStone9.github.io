@@ -75,6 +75,8 @@ display: inline-block;
 .intro{
     width: 60%
 }
+
+
 .card:hover{
     
     cursor: pointer;
