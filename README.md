@@ -1,4 +1,4 @@
-#MY own website
+# My Webpage
 Tried making portfolio website for myself.
 
 Its almost like a CV hosted up on github so that everyone can access it. 
