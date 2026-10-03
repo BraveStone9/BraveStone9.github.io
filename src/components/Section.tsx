@@ -5,10 +5,11 @@ interface Props {
   id: string
   title: string
   intro?: string
+  afterTitle?: ReactNode
   children: ReactNode
 }
 
-export default function Section({ id, title, intro, children }: Props) {
+export default function Section({ id, title, intro, afterTitle, children }: Props) {
   const { ref, visible } = useInView<HTMLElement>()
   return (
     <section
@@ -20,6 +21,7 @@ export default function Section({ id, title, intro, children }: Props) {
       <h2 id={`${id}-title`} className="text-2xl font-bold tracking-tight sm:text-3xl">
         {title}
       </h2>
+      {afterTitle}
       {intro && <p className="mt-2 max-w-2xl text-muted">{intro}</p>}
       <div className="mt-10">{children}</div>
     </section>

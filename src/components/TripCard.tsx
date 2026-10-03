@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ExternalLink, Map, Play } from 'lucide-react'
+import { Map, Play } from 'lucide-react'
 import type { Trip } from '../data/trips'
 
 export default function TripCard({ trip }: { trip: Trip }) {
@@ -24,7 +24,7 @@ export default function TripCard({ trip }: { trip: Trip }) {
 
       <div className="mt-4 flex flex-wrap gap-3">
         <a href={trip.playlist} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-md bg-accent px-3.5 py-2 text-sm font-medium text-on-accent hover:opacity-90">
-          <Play size={14} aria-hidden /> Watch the playlist <ExternalLink size={12} aria-hidden />
+          <Play size={14} aria-hidden /> Watch it on YouTube
         </a>
         {trip.mapEmbed && !showMap && (
           <button type="button" onClick={() => setShowMap(true)} className="inline-flex items-center gap-1.5 rounded-md border border-border px-3.5 py-2 text-sm font-medium hover:border-accent">

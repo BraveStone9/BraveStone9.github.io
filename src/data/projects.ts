@@ -3,6 +3,7 @@ import { links } from './links'
 export interface ProjectLink {
   label: string
   href: string
+  icon?: 'github' | 'file' | 'external'
 }
 
 export interface FlowStep {
@@ -50,9 +51,8 @@ export const projects: Project[] = [
     ],
     tech: ['Python', 'MCP', 'Gemini API', 'pytest'],
     links: [
-      { label: 'Repository', href: links.devosRepo },
-      { label: 'README', href: links.devosReadme },
-      { label: 'SAMPLE_OUTPUT.md', href: links.devosSampleOutput },
+      { label: 'Repo', href: links.devosRepo, icon: 'github' },
+      { label: 'Sample Output', href: links.devosSampleOutput, icon: 'file' },
     ],
     demo: 'devos',
     flow: [
@@ -78,7 +78,7 @@ export const projects: Project[] = [
     ],
     tech: ['Python', 'FastAPI', 'PyGithub', 'Gemini API', 'Docker', 'Fly.io', 'GitHub Actions'],
     links: [
-      { label: 'Repository', href: links.prReviewerRepo },
+      { label: 'Repo', href: links.prReviewerRepo, icon: 'github' },
       { label: 'Real review on a PR', href: links.prReviewerPr5 },
     ],
     demo: 'pr-reviewer',

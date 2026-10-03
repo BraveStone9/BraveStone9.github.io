@@ -3,6 +3,7 @@ import { Github, Linkedin } from './BrandIcons'
 import { links } from '../data/links'
 
 const btn = 'inline-flex items-center gap-2 rounded-md border px-4 py-2 text-sm font-medium transition-colors'
+const iconBtn = 'inline-flex h-10 w-10 items-center justify-center rounded-md border transition-colors'
 
 export default function Hero() {
   return (
@@ -19,11 +20,11 @@ export default function Hero() {
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <a href={links.cv} download className={`${btn} border-accent bg-accent text-on-accent hover:opacity-90`}>
-            <Download size={16} aria-hidden /> Download CV
+            <Download size={16} aria-hidden /> CV
           </a>
-          <a href={links.github} className={`${btn} border-border hover:border-accent`}><Github size={16} /> GitHub</a>
-          <a href={links.linkedin} className={`${btn} border-border hover:border-accent`}><Linkedin size={16} /> LinkedIn</a>
-          <a href={links.email} className={`${btn} border-border hover:border-accent`}><Mail size={16} aria-hidden /> Email</a>
+          <a href={links.github} aria-label="GitHub" title="GitHub" className={`${iconBtn} border-border hover:border-accent`}><Github size={18} /></a>
+          <a href={links.linkedin} aria-label="LinkedIn" title="LinkedIn" className={`${iconBtn} border-border hover:border-accent`}><Linkedin size={18} /></a>
+          <a href={links.email} aria-label="Email" title="Email" className={`${iconBtn} border-border hover:border-accent`}><Mail size={18} aria-hidden /></a>
         </div>
       </div>
       {/* Swap the photo by replacing public/images/main.jpg (square works best) */}
