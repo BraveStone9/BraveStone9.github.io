@@ -6,23 +6,24 @@ interface Props {
   title: string
   intro?: string
   afterTitle?: ReactNode
+  center?: boolean
   children: ReactNode
 }
 
-export default function Section({ id, title, intro, afterTitle, children }: Props) {
+export default function Section({ id, title, intro, afterTitle, center, children }: Props) {
   const { ref, visible } = useInView<HTMLElement>()
   return (
     <section
       id={id}
       ref={ref}
       aria-labelledby={`${id}-title`}
-      className={`reveal mx-auto max-w-7xl px-6 py-20 ${visible ? 'is-visible' : ''}`}
+      className={`reveal mx-auto max-w-7xl px-6 py-20 ${center ? 'text-center' : ''} ${visible ? 'is-visible' : ''}`}
     >
       <h2 id={`${id}-title`} className="text-2xl font-bold tracking-tight sm:text-3xl">
         {title}
       </h2>
       {afterTitle}
-      {intro && <p className="mt-2 max-w-2xl text-muted">{intro}</p>}
+      {intro && <p className={`mt-2 max-w-2xl text-muted ${center ? 'mx-auto' : ''}`}>{intro}</p>}
       <div className="mt-10">{children}</div>
     </section>
   )
