@@ -5,7 +5,6 @@ export const links = {
   cv: '/Aditya_Yadav_CV.pdf', 
 
   devosRepo: 'https://github.com/BraveStone9/mcp-devos',
-  devosReadme: 'https://github.com/BraveStone9/mcp-devos/blob/main/README.md',
   devosSampleOutput: 'https://github.com/BraveStone9/mcp-devos/blob/main/SAMPLE_OUTPUT.md',
 
   prReviewerRepo: 'https://github.com/BraveStone9/pr-reviewer',

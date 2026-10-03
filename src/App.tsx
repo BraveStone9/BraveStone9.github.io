@@ -1,4 +1,5 @@
 import Nav from './components/Nav'
+import ScrollProgress from './components/ScrollProgress'
 import Hero from './components/Hero'
 import ImpactStrip from './components/ImpactStrip'
 import Projects from './components/Projects'
@@ -14,8 +15,10 @@ export default function App() {
       <a href="#projects" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-accent focus:px-3 focus:py-2 focus:text-on-accent">
         Skip to content
       </a>
+      <ScrollProgress />
       <Nav />
-      <main>
+      <main className="relative">
+        <div aria-hidden className="hero-glow" />
         <Hero />
         <ImpactStrip />
         <Projects />

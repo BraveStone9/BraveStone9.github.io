@@ -15,7 +15,7 @@ export default function LearningPath() {
       <TagFilter tags={allTags} active={tag} onChange={setTag} />
       <div className="grid gap-4 sm:grid-cols-2" aria-live="polite">
         {shown.map((p) => (
-          <article key={p.id} className="flex flex-col rounded-lg border border-border bg-surface p-5">
+          <article key={p.id} className="card-lift flex flex-col rounded-lg border border-border bg-surface p-5">
             {!p.image && (
               <div aria-hidden className="mb-4 flex h-36 w-full items-center justify-center rounded-md border border-border bg-bg text-muted">
                 <BarChart3 size={32} />
@@ -27,7 +27,7 @@ export default function LearningPath() {
             <ul aria-label="Technologies" className="mt-3 flex flex-wrap gap-1.5">
               {p.tech.map((t) => <li key={t} className="font-mono text-xs text-muted">#{t}</li>)}
             </ul>
-            <a href={p.repo} target="_blank" rel="noreferrer" className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:underline">
+            <a href={p.repo} target="_blank" rel="noreferrer" className="link mt-4 inline-flex items-center gap-1.5 self-start text-sm font-medium">
               <Github size={14} /> View repository
             </a>
           </article>
