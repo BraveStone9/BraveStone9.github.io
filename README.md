@@ -1,5 +1,11 @@
-# My Webpage
-Tried making portfolio website for myself.
+# Portfolio
 
-Its almost like a CV hosted up on github so that everyone can access it. 
-I welcome all suggestion and feedbacks.
+Personal portfolio site, live at https://bravestone9.github.io
+
+## Tech stack
+
+- React 19 + TypeScript
+- Vite
+- Tailwind CSS
+- lucide-react (icons)
+- GitHub Actions + GitHub Pages (deployment)
