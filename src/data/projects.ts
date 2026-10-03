@@ -79,7 +79,7 @@ export const projects: Project[] = [
     tech: ['Python', 'FastAPI', 'PyGithub', 'Gemini API', 'Docker', 'Fly.io', 'GitHub Actions'],
     links: [
       { label: 'Repository', href: links.prReviewerRepo },
-      { label: 'Real review on PR #5', href: links.prReviewerPr5 },
+      { label: 'Real review on a PR', href: links.prReviewerPr5 },
     ],
     demo: 'pr-reviewer',
     flow: [
