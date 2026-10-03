@@ -8,7 +8,10 @@
   --text: #e6e9ef;
   --muted: #9aa3b5;
   --accent: #5eead4;
+  --accent2: #7dd3fc;
   --on-accent: #06201c;
+  --glow1: rgba(94, 234, 212, 0.16);
+  --glow2: rgba(99, 102, 241, 0.15);
 }
 :root[data-theme='light'] {
   --bg: #f7f8fa;
@@ -17,7 +20,10 @@
   --text: #11151c;
   --muted: #4b5567;
   --accent: #0f766e;
+  --accent2: #0369a1;
   --on-accent: #ffffff;
+  --glow1: rgba(15, 118, 110, 0.12);
+  --glow2: rgba(99, 102, 241, 0.12);
 }
 
 @theme inline {
@@ -38,12 +44,121 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-sans);
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
 
+/* ---------------------------------------------------------------------------
+   Interaction system. Every button, chip, link and card shares these rules, so
+   hover and press feel the same everywhere. Hover effects only apply on devices
+   that can really hover (not touch), so phones never get "stuck" hover states;
+   they get the press effect instead.
+   --------------------------------------------------------------------------- */
+@layer components {
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    border: 1px solid transparent; border-radius: 0.5rem;
+    padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 500; line-height: 1.25rem;
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .2s ease, background-color .2s, border-color .2s, filter .2s, color .2s;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn:disabled { opacity: 0.7; cursor: default; }
+  .btn-primary { background: var(--accent); color: var(--on-accent); }
+  .btn-secondary { border-color: var(--border); color: var(--text); }
+  .btn-icon { width: 2.5rem; height: 2.5rem; padding: 0; justify-content: center; border-color: var(--border); color: var(--text); }
+  .btn-ghost { padding: 0.25rem 0.5rem; color: var(--muted); }
+
+  .chip {
+    border: 1px solid var(--border); border-radius: 9999px; padding: 0.25rem 0.75rem;
+    font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); cursor: pointer;
+    transition: transform .15s ease, border-color .2s, color .2s, background-color .2s;
+  }
+  .chip:active { transform: scale(0.95); }
+  .chip[aria-pressed='true'] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+
+  /* Text links get an underline that slides in */
+  .link {
+    color: var(--accent); text-decoration: none;
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+    transition: background-size .25s ease;
+  }
+
+  /* Cards */
+  .card-lift {
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s;
+  }
+  .card-lift:active { transform: scale(0.99); }
+  .card-spot { position: relative; isolation: isolate; transition: border-color .25s; }
+  .card-spot::before {
+    content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
+    background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%);
+    opacity: 0; transition: opacity .25s;
+  }
+
+  @media (hover: hover) {
+    .btn-primary:hover { filter: brightness(1.08); transform: translateY(-2px); box-shadow: 0 8px 20px -6px var(--accent); }
+    .btn-primary:disabled:hover { filter: none; transform: none; box-shadow: none; }
+    .btn-secondary:hover, .btn-icon:hover { border-color: var(--accent); color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+    .btn-icon:hover { transform: translateY(-2px); }
+    .btn-ghost:hover { color: var(--text); }
+    .chip:hover { border-color: var(--accent); color: var(--text); }
+    .chip[aria-pressed='true']:hover { color: var(--on-accent); }
+    .link:hover { background-size: 100% 1px; }
+    .card-lift:hover {
+      transform: translateY(-4px);
+      border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+      box-shadow: 0 14px 34px -14px color-mix(in srgb, var(--accent) 45%, transparent);
+    }
+    .card-spot:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--border)); }
+    .card-spot:hover::before { opacity: 1; }
+  }
+}
+
+/* Gradient name in the hero */
+.grad-text {
+  background: linear-gradient(90deg, var(--text) 30%, var(--accent));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* Soft corner glows behind the hero; fades out before the Projects section */
+.hero-glow {
+  position: absolute; inset: 0 0 auto 0; height: 760px; z-index: -10; pointer-events: none;
+  background:
+    radial-gradient(620px 380px at 88% 0%, var(--glow1), transparent 65%),
+    radial-gradient(520px 380px at 0% 70%, var(--glow2), transparent 65%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+  mask-image: linear-gradient(to bottom, #000 55%, transparent);
+}
+
+/* Architecture diagram: steps light up in turn when "How it works" opens */
+.flow-node { animation: flow-lit .6s ease both; animation-delay: calc(var(--i) * .5s); }
+.flow-arrow { animation: flow-arrow .5s ease both; animation-delay: calc(var(--i) * .5s + .3s); }
+@keyframes flow-lit {
+  0% { box-shadow: 0 0 0 0 transparent; }
+  35% { box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 35%, transparent); border-color: var(--accent); }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+@keyframes flow-arrow {
+  0%, 100% { color: var(--muted); transform: none; }
+  45% { color: var(--accent); transform: scale(1.35); }
+}
+
+/* Photo flip in the hero */
+.photo-flip img { transition: opacity .45s ease, transform .45s ease; }
+.photo-flip .photo-b { opacity: 0; transform: scale(1.08); }
+.photo-flip[aria-pressed='true'] .photo-a { opacity: 0; transform: scale(.94); }
+.photo-flip[aria-pressed='true'] .photo-b { opacity: 1; transform: none; }
+@media (hover: hover) {
+  .photo-flip:hover .photo-a { opacity: 0; transform: scale(.94); }
+  .photo-flip:hover .photo-b { opacity: 1; transform: none; }
+}
+
 /* Fade-in on scroll (toggled by the useInView hook) */
 .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
 .reveal.is-visible { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
+  .flow-node, .flow-arrow { animation: none; }
+  .btn, .chip, .card-lift, .link, .photo-flip img { transition: none; }
+  .btn-primary:hover, .btn-icon:hover, .card-lift:hover { transform: none; }
 }
 
 /* Print: a clean light one-pager, no chrome or interactive bits */
@@ -52,7 +167,10 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-sans);
     --bg: #fff; --surface: #fff; --border: #ccc; --text: #000; --muted: #333; --accent: #0f766e; --on-accent: #fff;
   }
   .reveal { opacity: 1; transform: none; }
-  header, footer, #top a[download], button, .no-print { display: none !important; }
+  header, footer, #top a[download], button, .no-print, .hero-glow, .scroll-progress { display: none !important; }
+  button.photo-flip { display: block !important; }
+  .photo-b { display: none; }
+  .grad-text { background: none; color: #000; -webkit-text-fill-color: currentColor; }
   [hidden] { display: block !important; }
   article { break-inside: avoid; }
   section { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }

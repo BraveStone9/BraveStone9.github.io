@@ -50,11 +50,11 @@ export default function DevosDemo() {
 
       <div className="mt-3">
         {done ? (
-          <button type="button" onClick={() => setShown(-1)} className="inline-flex items-center gap-2 text-sm text-muted hover:text-fg">
+          <button type="button" onClick={() => setShown(-1)} className="btn btn-ghost">
             <RotateCcw size={14} aria-hidden /> Reset
           </button>
         ) : (
-          <button type="button" onClick={play} disabled={running} className="inline-flex items-center gap-2 rounded-md bg-accent px-3.5 py-2 text-sm font-medium text-on-accent disabled:opacity-70">
+          <button type="button" onClick={play} disabled={running} className="btn btn-primary">
             <Play size={14} aria-hidden /> {running ? 'Investigating…' : 'Replay the run'}
           </button>
         )}

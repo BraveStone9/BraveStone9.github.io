@@ -41,7 +41,7 @@ export default function Experience() {
           <p className="mt-3 max-w-2xl text-sm text-muted">
             <span className="font-medium text-fg">Thesis: </span>
             {education.thesis.text}{' '}
-            <a href={education.thesis.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 whitespace-nowrap font-medium text-accent hover:underline">
+            <a href={education.thesis.href} target="_blank" rel="noreferrer" className="link inline-flex items-center gap-1 whitespace-nowrap font-medium">
               Thesis PDF <ExternalLink size={12} aria-hidden />
             </a>
           </p>

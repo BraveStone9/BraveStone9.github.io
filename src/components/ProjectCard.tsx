@@ -1,4 +1,4 @@
-import { useId, useState } from 'react'
+import { useId, useState, type PointerEvent } from 'react'
 import { ChevronDown, ExternalLink, FileText } from 'lucide-react'
 import { Github } from './BrandIcons'
 import type { Project } from '../data/projects'
@@ -10,8 +10,15 @@ export default function ProjectCard({ project }: { project: Project }) {
   const [open, setOpen] = useState(false)
   const panelId = useId()
 
+  // Feeds the cursor position to the card's hover spotlight (see .card-spot in index.css)
+  const spotlight = (e: PointerEvent<HTMLElement>) => {
+    const r = e.currentTarget.getBoundingClientRect()
+    e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`)
+    e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`)
+  }
+
   return (
-    <article className="rounded-xl border border-border bg-surface p-6 sm:p-8">
+    <article onPointerMove={spotlight} className="card-spot rounded-xl border border-border bg-surface p-6 sm:p-8">
       <h3 className="text-xl font-bold sm:text-2xl">{project.title}</h3>
       <p className="mt-3 text-muted">{project.summary}</p>
 
@@ -31,7 +38,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           aria-expanded={open}
           aria-controls={panelId}
           onClick={() => setOpen((o) => !o)}
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-accent"
+          className="btn btn-ghost -ml-2 text-accent"
         >
           How it works
           <ChevronDown size={16} aria-hidden className={`transition-transform ${open ? 'rotate-180' : ''}`} />
@@ -50,7 +57,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       <div className="mt-6 flex flex-wrap gap-3 border-t border-border pt-5">
         {project.links.map((l) => (
           <a key={l.label} href={l.href} target="_blank" rel="noreferrer"
-             className="inline-flex items-center gap-1.5 rounded-md bg-accent px-3.5 py-2 text-sm font-medium text-on-accent hover:opacity-90">
+             className="btn btn-primary">
             {l.icon === 'github' && <Github size={14} />}
             {l.icon === 'file' && <FileText size={14} aria-hidden />}
             {l.label}

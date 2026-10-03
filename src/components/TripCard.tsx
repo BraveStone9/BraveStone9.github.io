@@ -6,7 +6,7 @@ export default function TripCard({ trip }: { trip: Trip }) {
   const [showMap, setShowMap] = useState(false)
 
   return (
-    <article className="flex flex-col rounded-lg border border-border bg-surface p-5">
+    <article className="card-lift flex flex-col rounded-lg border border-border bg-surface p-5">
       {trip.image && (
         <img
           src={trip.image}
@@ -23,11 +23,11 @@ export default function TripCard({ trip }: { trip: Trip }) {
       <p className="mt-1 text-sm text-muted">{trip.subtitle}</p>
 
       <div className="mt-4 flex flex-wrap gap-3">
-        <a href={trip.playlist} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-md bg-accent px-3.5 py-2 text-sm font-medium text-on-accent hover:opacity-90">
+        <a href={trip.playlist} target="_blank" rel="noreferrer" className="btn btn-primary">
           <Play size={14} aria-hidden /> Watch it on YouTube
         </a>
         {trip.mapEmbed && !showMap && (
-          <button type="button" onClick={() => setShowMap(true)} className="inline-flex items-center gap-1.5 rounded-md border border-border px-3.5 py-2 text-sm font-medium hover:border-accent">
+          <button type="button" onClick={() => setShowMap(true)} className="btn btn-secondary">
             <Map size={14} aria-hidden /> Show route map
           </button>
         )}
